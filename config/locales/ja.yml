@@ -1,0 +1,12 @@
+ja:
+  enums:
+    user:
+      school_year:
+        jhs_1: "中学1年"
+        jhs_2: "中学2年"
+        jhs_3: "中学3年"
+        hs_1: "高校1年"
+        hs_2: "高校2年"
+        hs_3: "高校3年"
+        adult: "大学生以上"
+        

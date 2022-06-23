@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row mt-4">
+    <h3 class="text-info col-8 offset-1">投稿一覧</h3>
+    <div class="col-3">
+      <%= form_with url: admin_search_path, method: :get do |f| %>
+        <div class="input-group">
+          <%= f.text_field :word, placeholder: "キーワードを入力", class: "form-control input-group-prepend" %>
+          <span class="input-group-btn input-group-append">
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-11 offset-1">
+      <% @post_study_methods.reverse_each do |post_study_method| %>
+        <div class="border-bottom">
+          <%= link_to admin_user_path(post_study_method.user) do %>
+            <span><%= post_study_method.user.name %></span>
+          <% end %>
+          <span><%= post_study_method.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+          <h5>
+            <%= link_to admin_post_study_method_path(post_study_method) do %>
+              <%= post_study_method.title %>
+            <% end %>
+          </h5>
+          <p><%= post_study_method.body %></p>
+          <span>いいね数: <%= post_study_method.favorites.count %></span>
+          <span class="ml-3">コメント数: <%= link_to "#{post_study_method.comments.count}", admin_post_study_method_path(post_study_method) %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

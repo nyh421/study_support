@@ -1,0 +1,33 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12 offset-4">
+      <h3 class="text-info">ユーザー情報編集</h3>
+      <div class="mt-4">
+        <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+          <div class="field mb-4">
+            <%= f.label :name, "ユーザーネーム" %><br>
+            <%= f.text_field :name %>
+          </div>
+          <div class="field mb-4">
+            <%= f.label :school_year, "学年" %><br>
+            <%= f.select :school_year, [["中学1年","jhs_1"], ["中学2年","jhs_2"], ["中学3年","jhs_3"], ["高校1年","hs_1"], ["高校2年","hs_2"], ["高校3年","hs_3"], ["大学生以上","adult"]]%>
+          </div>
+          <div class="field mb-4">
+            <%= f.label :email, "メールアドレス" %><br>
+            <%= f.email_field :email %>
+          </div>
+          <div class="field mb-5">
+            <%= f.label "ステータス" %><br>
+            <%= f.radio_button :is_deleted, false %>
+            <%= f.label :is_deleted, "有効" %>
+            <%= f.radio_button :is_deleted, true %>
+            <%= f.label :is_deleted, "退会" %>
+          </div>
+          <div class="field">
+            <%= f.submit "変更を保存", class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
