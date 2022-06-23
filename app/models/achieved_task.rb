@@ -1,0 +1,2 @@
+class AchievedTask < ApplicationRecord
+end

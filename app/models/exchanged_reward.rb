@@ -1,0 +1,2 @@
+class ExchangedReward < ApplicationRecord
+end

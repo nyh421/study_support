@@ -1,0 +1,2 @@
+class PostStudyMethod < ApplicationRecord
+end
