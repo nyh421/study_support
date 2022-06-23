@@ -1,4 +1,4 @@
-# e_study
+# study_support
 
 ## サイト概要
 ### サイトテーマ
