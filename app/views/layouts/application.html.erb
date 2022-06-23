@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StudySupport</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EStudy</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +10,24 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column vh-100">
+    <% if admin_signed_in? %>
+      <%= render "layouts/admin_header" %>
+    <% else %>
+      <%= render "layouts/user_header" %>
+    <% end %>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    <main>
+      <%= yield %>
+    </main>
+    <footer class="bg-info text-white pt-4 pb-3 mt-auto">
+      <div class="container">
+        <div class="row">
+          <p class="col-12 text-center">© 2022 Naoki Matsumoto</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,52 @@
+<header class="shadow">
+  <nav class="bg-info navbar navbar-expand-md navbar-light">
+    <div class="container">
+      <a class="navbar-brand p-4 text-white" href="/">e-study</a>
+      <!--ハンバーガーメニュー-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "タスク管理", new_task_path, class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ランキング", users_path, class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧", post_study_methods_path, class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "マイページ", user_path(current_user), class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-white" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% if user_signed_in? %>
+    <div class="d-flex align-items-center justify-content-end">
+      <%= link_to user_path(current_user) do %>
+        <p class="my-2 ml-5"><%= image_tag current_user.get_profile_image(50,50) %></p>
+      <% end %>
+      <p class="my-2 ml-2"><%= current_user.name %></p>
+      <p class="my-2 ml-2"><%= current_user.school_year_i18n %></p>
+      <p class="my-2 ml-3 mr-auto">トータル勉強時間: <%= current_user.achieved_tasks.sum(:study_hour) %>時間</p>
+      <p class="my-2 mr-2">P: <%= current_user.point %>ポイント</p>
+      <p class="my-2">→</p>
+      <p class="my-2 ml-2 mr-5"><%= link_to "ポイントを交換する", new_reward_path, class: "btn btn-outline-info" %></p>
+    </div>
+  <% end %>
+</header>
