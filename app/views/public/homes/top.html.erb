@@ -1,11 +1,15 @@
-<h2>topページ</h2>
-
 <div class="container">
   <div class="row">
+    <div class="col-12">
+      <h1 class="text-primary text-center my-5">study-support</h1>
+      <h3 class="text-center">楽しみながら学ぼう</h3>
+    </div>
+  </div>
+  <div class="row">
     <div class="btn-wrapper col-7 mx-auto">
-      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark btn-block" %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary btn-block" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-success btn-block" %>
+      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark btn-block my-5" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary btn-block my-5" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-success btn-block my-5" %>
     </div>
   </div>
 </div>
