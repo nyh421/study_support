@@ -20,9 +20,9 @@
                 <td>
                   <%= link_to "達成", task_achieved_tasks_path(task), method: :post, data: {confirm: "タスクを達成しますか？"}, class: "btn btn-success" %>
                 </td>
-                <td><%= task.subject.name %></td>
-                <td><%= task.content %></td>
-                <td><%= task.study_hour %>時間</td>
+                <td><b><%= task.subject.name %></b></td>
+                <td><b><%= task.content %></b></td>
+                <td><b><%= task.study_hour %>時間</b></td>
                 <td>
                   <%= link_to "編集", edit_task_path(task), class: "btn btn-secondary" %>
                 </td>
