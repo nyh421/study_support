@@ -1,0 +1,80 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-8 p-5 shadow">
+      <h3 class="text-info">タスク一覧</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="bg-light">
+            <tr>
+              <th>達成</th>
+              <th>科目</th>
+              <th>タスク</th>
+              <th>時間</th>
+              <th>編集</th>
+              <th>削除</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td>
+                  <%= link_to "達成", task_achieved_tasks_path(task), method: :post, data: {confirm: "タスクを達成しますか？"}, class: "btn btn-success" %>
+                </td>
+                <td><%= task.subject.name %></td>
+                <td><%= task.content %></td>
+                <td><%= task.study_hour %>時間</td>
+                <td>
+                  <%= link_to "編集", edit_task_path(task), class: "btn btn-secondary" %>
+                </td>
+                <td>
+                  <%= link_to "削除", task_path(task), method: :delete, class: "btn btn-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-3 p-5 offset-1 shadow">
+      <p class="text-center">今日は<b class="text-danger"><%= @todays_total_study_time %></b>時間勉強しました！</p>
+      <p class="text-center">↓</p>
+      <div>
+        <%= link_to "学習の記録を見る", achieved_tasks_path, class: "btn btn-outline-info btn-block" %>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-8 shadow p-5">
+      <h3 class="text-info">タスク追加</h3>
+      <div>
+        <%= form_with model: @task, url: tasks_path, method: :post do |f| %>
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= f.label :subject_id, "科目:", class: "mr-2" %>
+              <%= f.select :subject_id, options_from_collection_for_select(current_user.subjects.all, :id, :name) %>
+            </div>
+            <div>
+              <%= f.label :content, "タスク:", class: "mr-2" %>
+              <%= f.text_field :content, placeholder: "(例)国語の教科書", autocomplete: "off" %>
+            </div>
+            <div>
+              <%= f.label :study_hour, "学習時間:", class: "mr-2" %>
+              <%= f.select :study_hour, *[((0.5)..(12.0)).step(0.5)] %>時間
+            </div>
+            <div>
+              <%= f.submit "タスク追加", class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <p>↓<br>科目の追加は<%= link_to "こちら", new_subject_path %></p>
+    </div>
+    <div class="col-3 shadow p-5 offset-1">
+      <p class="text-center">みんなのおすすめの勉強方法を見てみよう！</p>
+      <p class="text-center">↓</p>
+      <div>
+        <%= link_to "投稿を見る", post_study_methods_path, class: "btn btn-outline-success btn-block" %>
+      </div>
+    </div>
+  </div>
+</div>

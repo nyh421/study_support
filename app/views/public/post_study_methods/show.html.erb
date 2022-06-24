@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <div class="mt-4">
+        <h4 class="text-info">投稿詳細</h4>
+      </div>
+      <div class="card mt-4">
+        <div class="card-header">
+          <span>
+            <%= link_to user_path(@post_study_method.user) do %>
+              <%= image_tag @post_study_method.user.get_profile_image(30,30) %>
+            <% end %>
+          </span>
+          <span>
+            <%= @post_study_method.user.name %>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= @post_study_method.title %>
+          </h5>
+          <p class="card-text">
+            <%= @post_study_method.body %>
+          </p>
+        </div>
+        <div class="card-footer">
+          <span>
+            <% if @post_study_method.favorited_by?(current_user) %>
+              <%= link_to post_study_method_favorites_path(@post_study_method), method: :delete do %>
+                ❤<%= @post_study_method.favorites.count %>いいね
+              <% end %>
+            <% else %>
+              <%= link_to post_study_method_favorites_path(@post_study_method), method: :post do %>
+                ♡<%= @post_study_method.favorites.count %>いいね
+              <% end %>
+            <% end %>
+          </span>
+          <span class="ml-4">
+            コメント数: <%= @post_study_method.comments.count %>
+          </span>
+          <span class="ml-5">
+            <%= @post_study_method.created_at.strftime('%Y/%m/%d %H:%M')%>
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="mt-4">
+          <h4 class="text-info">コメント投稿</h4>
+        </div>
+        <div class="mt-4">
+          <%= form_with model: @comment, url: post_study_method_comments_path(@post_study_method), method: :post do |f| %>
+            <div class="d-flex">
+              <div>
+                <%= f.text_area :comment, placeholder: "コメントをここに", autocomplete: "off" %>
+              </div>
+              <div>
+                <%= f.submit "送信", class: "btn btn-secondary mt-3 ml-3" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 offset-1">
+      <div class="mt-4">
+        <h4 class="text-info">コメント一覧(<%= @post_study_method.comments.count %>件)</h4>
+      </div>
+      <div class="mt-4">
+        <% @post_study_method.comments.reverse_each do |comment| %>
+          <div class="border-bottom">
+            <%= link_to user_path(comment.user) do %>
+              <span><%= image_tag comment.user.get_profile_image(50,50) %></span>
+            <% end %>
+            <span><%= comment.user.name %></span>
+            <span><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+            <p><%= comment.comment %></p>
+            <% if comment.user == current_user %>
+              <%= link_to "削除", post_study_method_comment_path(comment.post_study_method,comment), method: :delete %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="offset-2">
+        <h3 class="text-info">ご褒美編集</h3>
+      </div>
+      <div>
+        <%= form_with model: @reward, url: reward_path, method: :patch do |f| %>
+          <div class="d-flex offset-2 mt-4">
+            <div class="mr-3">
+              <%= f.label :content, "内容:" %>
+              <%= f.text_field :content, placeholder: "(例)ゲームを1時間できる,1日好きなだけ漫画を読める", autocomplete: "off" %>
+            </div>
+            <div class="mr-3">
+              <%= f.label :point, "必要ポイント:" %>
+              <%= f.select :point, *[((0.5)..(100.0)).step(0.5)] %>ポイント
+            </div>
+            <div>
+              <%= f.submit "変更を保存", class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

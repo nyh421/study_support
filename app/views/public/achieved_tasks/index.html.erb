@@ -1,0 +1,112 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-info">学習の記録</h3>
+      <div class="mt-4">
+        <table class="table table-bordered">
+          <thead class="bg-light">
+            <tr>
+              <th>トータル</th>
+              <th>今日</th>
+              <th>今月</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b><%= @total_study_time %></b>時間</td>
+              <td><b><%= @day_study_time %></b>時間</td>
+              <td><b><%= @month_study_time %></b>時間</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row shadow p-5 mt-5">
+    <div class="col-6">
+      <h4 class="mb-4">トータル科目別学習時間</h4>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th colspan="2">トータル</th>
+            </tr>
+            <tr>
+              <th>科目</th>
+              <th>勉強時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @total_study_record.each do |total_study_record| %>
+              <tr>
+                <td><%= total_study_record.first %></td>
+                <td><%= total_study_record.second %>時間</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-6">
+      <%= pie_chart @total_study_record %>
+    </div>
+  </div>
+  <div class="row shadow p-5 mt-5">
+    <div class="col-6">
+      <h4 class="mb-4">今日の科目別学習時間</h4>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th colspan="2">今日</th></th>
+            </tr>
+            <tr>
+              <th>科目</th>
+              <th>勉強時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @day_study_record.each do |day_study_record| %>
+              <tr>
+                <td><%= day_study_record.first %></td>
+                <td><%= day_study_record.second %>時間</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-6">
+      <%= pie_chart @day_study_record %>
+    </div>
+  </div>
+  <div class="row shadow p-5 mt-5">
+    <div class="col-6">
+      <h4 class="mb-4">今月の科目別学習時間</h4>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th colspan="2">今月</th>
+            </tr>
+            <tr>
+              <th>科目</th>
+              <th>勉強時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @month_study_record.each do |month_study_record| %>
+              <tr>
+                <td><%= month_study_record.first %></td>
+                <td><%= month_study_record.second %>時間</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-6">
+      <%= pie_chart @month_study_record %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-10 offset-1">
+      <h3 class="text-info mb-4">ポイント交換ページ</h3>
+      <h4 class="text-info mt-3">交換したご褒美</h4>
+    </div>
+  </div>
+  <div class="row">
+    <% @exchanged_reward.each do |exchanged_reward| %>
+      <div class="col-3 offset-1">
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text"><%= exchanged_reward.content %></p>
+            <%= link_to "実行", reward_exchanged_reward_path(exchanged_reward.reward, exchanged_reward), method: :delete, data: {confirm: "ご褒美を実行しますか？"}, class: "btn btn-info" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mt-2">
+    <div class="col-10 offset-1">
+      <h4 class="text-info">ご褒美一覧</h4>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>交換する</th>
+              <th>内容</th>
+              <th>必要ポイント</th>
+              <th>編集</th>
+              <th>削除</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @rewards.each do |reward| %>
+              <tr>
+                <td>
+                  <%= link_to reward_exchanged_rewards_path(reward), method: :post, data: {confirm: "ポイントと交換しますか？"} do %>
+                    <p>交換</p>
+                  <% end %>
+                </td>
+                <td><%= reward.content %></td>
+                <td><%= reward.point %></td>
+                <td>
+                  <%= link_to edit_reward_path(reward) do %>
+                    <p>編集</p>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to reward_path(reward), method: :delete do %>
+                    <p>削除</p>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-7 offset-1">
+      <h4 class="text-info">ご褒美設定</h4>
+      <div>
+        <%= form_with model: @reward, url: rewards_path, method: :post do |f| %>
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= f.label :content, "内容:" %>
+              <%= f.text_field :content, placeholder: "(例)ゲームを1時間できる,1日好きなだけ漫画を読める", autocomplete: "off" %>
+            </div>
+            <div>
+              <%= f.label :point, "必要ポイント:" %>
+              <%= f.select :point, *[((0.5)..(100.0)).step(0.5)] %>ポイント
+            </div>
+            <div>
+              <%= f.submit "ご褒美設定", class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

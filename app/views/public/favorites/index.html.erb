@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-11 offset-1">
+      <h3 class="text-info">いいね一覧</h3>
+      <% @favorites.each do |favorite| %>
+        <div class="border-bottom">
+          <%= link_to user_path(favorite.post_study_method.user) do %>
+            <span><%= image_tag favorite.post_study_method.user.get_profile_image(50,50) %></span>
+          <% end %>
+          <span><%= favorite.post_study_method.user.name %></span>
+          <span><%= favorite.post_study_method.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+          <h5>
+            <%= link_to post_study_method_path(favorite.post_study_method) do %>
+              <%= favorite.post_study_method.title %>
+            <% end %>
+          </h5>
+          <p><%= favorite.post_study_method.body %></p>
+          <span>
+            <% if favorite.post_study_method.favorited_by?(current_user) %>
+              <%= link_to post_study_method_favorites_path(favorite.post_study_method), method: :delete do %>
+                ❤<%= favorite.post_study_method.favorites.count %>いいね
+              <% end %>
+            <% else %>
+              <%= link_to post_study_method_favorites_path(favorite.post_study_method), method: :post do %>
+                ♡<%= favorite.post_study_method.favorites.count %>いいね
+              <% end %>
+            <% end %>
+          </span>
+          <span class="ml-3">
+            コメント数: <%= link_to "#{favorite.post_study_method.comments.count}", post_study_method_path(favorite.post_study_method) %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

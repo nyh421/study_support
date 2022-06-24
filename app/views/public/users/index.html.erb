@@ -1,0 +1,97 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h3 class="text-info">ランキング</h3>
+      <div class="mt-3">
+        <span class="mr-3">
+          <input type="radio" id="total" name="btn" checked="checked" onclick="buttonClick()">トータル
+        </span>
+        <span class="mr-3">
+          <input type="radio" id="day" name="btn" onclick="buttonClick()">今日
+        </span>
+        <span>
+          <input type="radio" id="month" name="btn" onclick="buttonClick()">今月
+        </span>
+      </div>
+      <div class="mt-4">
+        <!--ラジオボタンでトータルが選択された時に表示-->
+        <div id="my_total_rank">
+          <p>
+            トータルのあなたのランキングは<b class="text-danger"><%= @total_my_rank %>位</b>です
+          </p>
+        </div>
+        <!--ラジオボタンで今日が選択された時に表示-->
+        <div id="my_day_rank" style="display: none">
+          <p>
+            今日のあなたのランキングは<b class="text-danger"><%= @day_my_rank %>位</b>です
+          </p>
+        </div>
+        <!--ラジオボタンで今月が表示された時に表示-->
+        <div id="my_month_rank" style="display: none">
+          <p>
+            今月のあなたのランキングは<b class="text-danger"><%= @month_my_rank %>位</b>です
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-8 shadow p-5 offset-2">
+      <table class="table table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>順位</th>
+            <th>ユーザーネーム</th>
+            <th>学年</th>
+            <th>勉強時間</th>
+          </tr>
+        </thead>
+        <!--ラジオボタンでトータルが選択された時に表示-->
+        <tbody id="total_rank">
+          <% @total_study_ranks.each.with_index(1) do |rank, i| %>
+            <tr>
+              <td><%= i %>位</td>
+              <td>
+                <%= link_to user_path(rank.first) do %>
+                  <%= User.find(rank.first).name %>
+                <% end %>
+              </td>
+              <td><%= User.find(rank.first).school_year_i18n %></td>
+              <td><%= rank.second %>時間</td>
+            </tr>
+          <% end %>
+        </tbody>
+        <!--ラジオボタンで今日が選択された時に表示-->
+        <tbody id="day_rank" style="display: none">
+          <% @day_study_ranks.each.with_index(1) do |rank, i| %>
+            <tr>
+              <td><%= i %>位</td>
+              <td>
+                <%= link_to user_path(rank.first) do %>
+                  <%= User.find(rank.first).name %>
+                <% end %>
+              </td>
+              <td><%= User.find(rank.first).school_year_i18n %></td>
+              <td><%= rank.second %>時間</td>
+            </tr>
+          <% end %>
+        </tbody>
+        <!--ラジオボタンで今月が表示された時に表示-->
+        <tbody id="month_rank" style="display: none">
+          <% @month_study_ranks.each.with_index(1) do |rank, i| %>
+            <tr>
+              <td><%= i %>位</td>
+              <td>
+                <%= link_to user_path(rank.first) do %>
+                  <%= User.find(rank.first).name %>
+                <% end %>
+              </td>
+              <td><%= User.find(rank.first).school_year_i18n %></td>
+              <td><%= rank.second %>時間</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

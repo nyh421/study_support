@@ -1,0 +1,11 @@
+<h2>topページ</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="btn-wrapper col-7 mx-auto">
+      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-dark btn-block" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary btn-block" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-success btn-block" %>
+    </div>
+  </div>
+</div>

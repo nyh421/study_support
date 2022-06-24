@@ -1,0 +1,30 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="offset-2">
+        <h3 class="text-info">タスク編集</h3>
+      </div>
+      <div>
+        <%= form_with model: @task, url: task_path, method: :patch do |f| %>
+          <div class="d-flex offset-2 mt-4">
+            <div class="mr-3">
+              <%= f.label :content, "タスク" %>
+              <%= f.text_field :content, placeholder: "(例)国語の教科書", autocomplete: "off" %>
+            </div>
+            <div class="mr-3">
+              <%= f.label :study_hour, "学習時間" %>
+              <%= f.select :study_hour, *[((0.5)..(12.0)).step(0.5)] %>時間
+            </div>
+            <div class="mr-3">
+              <%= f.label :subject_id, "科目" %>
+              <%= f.select :subject_id, options_from_collection_for_select(current_user.subjects.all, :id, :name) %>
+            </div>
+            <div>
+              <%= f.submit "変更を保存", class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
