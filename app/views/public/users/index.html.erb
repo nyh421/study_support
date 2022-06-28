@@ -53,6 +53,7 @@
               <td><%= i %>位</td>
               <td>
                 <%= link_to user_path(rank.first) do %>
+                  <%= image_tag User.find(rank.first).get_profile_image(40,40) %>
                   <%= User.find(rank.first).name %>
                 <% end %>
               </td>
@@ -68,6 +69,7 @@
               <td><%= i %>位</td>
               <td>
                 <%= link_to user_path(rank.first) do %>
+                  <%= image_tag User.find(rank.first).get_profile_image(40,40) %>
                   <%= User.find(rank.first).name %>
                 <% end %>
               </td>
@@ -83,6 +85,7 @@
               <td><%= i %>位</td>
               <td>
                 <%= link_to user_path(rank.first) do %>
+                  <%= image_tag User.find(rank.first).get_profile_image(40,40) %>
                   <%= User.find(rank.first).name %>
                 <% end %>
               </td>
