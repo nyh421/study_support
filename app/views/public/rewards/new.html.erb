@@ -35,7 +35,7 @@
             <% @rewards.each do |reward| %>
               <tr>
                 <td>
-                  <%= link_to "達成", reward_exchanged_rewards_path(reward), method: :post, data: {confirm: "ポイントと交換しますか？"}, class: "btn btn-success" %>
+                  <%= link_to "交換", reward_exchanged_rewards_path(reward), method: :post, data: {confirm: "ポイントと交換しますか？"}, class: "btn btn-success" %>
                 </td>
                 <td><%= reward.content %></td>
                 <td><%= reward.point %></td>
