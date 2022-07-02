@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     get "/favorites", to: "favorites#index"
     get "/search", to: "post_study_methods#search"
     get "/quit", to: "users#quit"
+    get "/about", to: "homes#about"
     patch "/out", to: "users#out"
   end
 
