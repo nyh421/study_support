@@ -10,8 +10,7 @@ class Public::TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.user_id = current_user.id
+    @task = current_user.tasks.new(task_params)
     if @task.save
       flash[:notice] = "タスクを追加しました。"
       redirect_to new_task_path
